@@ -18,7 +18,6 @@ def accel(Phi):
     acc[iy][:,1:Ng - 1] = (Phi[:,:Ng-2] - Phi[:,2:Ng]) / 2
     acc[ix][:,:,1:Ng-1] = (Phi[:,:,:Ng-2] - Phi[:,:,2:Ng]) / 2
     
-    # boundaries
     acc[iz][0]     = (Phi[-1] - Phi[1]) / 2
     acc[iy][:,0]   = (Phi[:,-1] - Phi[:,1]) / 2
     acc[ix][:,:,0] = (Phi[:,:,-1] - Phi[:,:,1]) / 2
@@ -28,6 +27,7 @@ def accel(Phi):
     acc[ix][:,:,Ng-1] = (Phi[:,:,Ng-2] - Phi[:,:,-1]) / 2
     
     return acc
+
 
 def Force(pos, acc):
     '''
@@ -39,9 +39,8 @@ def Force(pos, acc):
         - acc:
           acceleration field
     Return:
-      F: force
+      F: 3D force
     '''
-    
     F = np.array([0., 0., 0.])
     q, p, r = int(np.floor(pos[iz] - 1/2)), int(np.floor(pos[iy] - 1/2)), int(np.floor(pos[ix] - 1/2))
     qs, ps, rs = pos[iz] - 1/2 - q, pos[iy] - 1/2 - p, pos[ix] - 1/2 - r

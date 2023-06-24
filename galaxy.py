@@ -16,13 +16,13 @@ def sph_sampler(func1, func2, args1, args2, N):
     Return:
         part: position, velocity and mass of particles
     '''
-    r_bin = np.arange(0.01, 20, .01)
+    r_bin = np.arange(0.01, 10, .01)
     
     # (r, theta, phi)
     prob = func1(r_bin, args1) * r_bin**2
     r_rand = np.random.choice(r_bin, N, p=prob/np.sum(prob))
     a_rand = np.random.rand(N) * np.pi * 2
-    b_rand = (np.random.rand(N) - 0.5) * np.pi
+    b_rand = np.arcsin(2*np.random.rand(N) - 1)
     # (z, y, x) of the particles
     pos = np.array( [r_rand * np.sin(b_rand),
                      r_rand * np.cos(a_rand) * np.cos(b_rand),
@@ -31,7 +31,7 @@ def sph_sampler(func1, func2, args1, args2, N):
     # (sigma_x, sigma_y, sigma_z)
     sigma = func2(r_rand, args2)
     c_rand = np.random.rand(N) * np.pi * 2
-    d_rand = (np.random.rand(N) - 0.5) * np.pi
+    d_rand = np.arcsin(2*np.random.rand(N) - 1)
     v_disp = np.array( [sigma * np.sin(d_rand),
                         sigma * np.cos(c_rand) * np.cos(d_rand),
                         sigma * np.sin(c_rand) * np.cos(d_rand)] ).T
@@ -69,5 +69,8 @@ def set_spheroid(num, center, pec_vel,
     particles[:, ivx] += pec_vel[2]
     return particles
 
+def disk_sampler():
+    pass
+    
 def set_disk():
     pass

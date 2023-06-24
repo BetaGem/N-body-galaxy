@@ -75,3 +75,10 @@ def CIC_3D(part):
         dens[(q + 1) % Ng][(p + 1) % Ng][(r + 1) % Ng] += ps * qs * rs * m
     
     return dens
+
+def zero_padding(dens):
+    
+    dens_pad = np.zeros((2*Ng, 2*Ng, 2*Ng))
+    dens_pad[:Ng, :Ng, :Ng] = dens
+    
+    return dens_pad

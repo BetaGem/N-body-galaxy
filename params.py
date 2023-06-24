@@ -1,7 +1,7 @@
-N  =  1000  # number of particles
-Ng =  128   # number of grids, with size h = 1
-dt =  0.1   # time step
-t_tot = 50  # total time
+N  =  2048  # number of particles
+Ng =  200   # number of grids, with size h = 1
+dt =  0.2   # time step
+t_tot = 20  # total time
 
 G = 1       # gravitational const.
 
