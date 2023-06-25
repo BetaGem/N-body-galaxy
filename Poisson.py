@@ -10,7 +10,6 @@ def poisson_solver_fft3(dens):
     Return: 
        Phi: gravitational potential field.
     '''
-    G = 1
     L = len(dens)
     g_k = np.concatenate((np.mgrid[:L//2,:L,:L][iz], np.mgrid[:L//2,:L,:L][iz] - L/2), axis=0) ** 2 + \
           np.concatenate((np.mgrid[:L,:L//2,:L][iy], np.mgrid[:L,:L//2,:L][iy] - L/2), axis=1) ** 2 + \

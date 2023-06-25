@@ -14,12 +14,12 @@ np.seterr(all="ignore")
 if __name__ == "__main__":
     
     # initializing particles
-    stellar1 = galaxy.set_spheroid(N, [0.5*Ng, 0.5*Ng, 0.5*Ng], [0, 0, 0], 
-                                  pf.Gaussian, (1, 4), pf.const, (10,))
-    stellar2 = galaxy.set_spheroid(N//5, [0.5*Ng, 0.7*Ng, 0.7*Ng], [0, -3, 0], 
-                                  pf.Gaussian, (1, 2), pf.const, (5,))
+    stellar1 = galaxy.set_spheroid(N, [320, 330, 330], [0, -7.57, 0], 
+                                   pf.power, (1, 10, 2), pf.const, (115,))
+    stellar2 = galaxy.set_spheroid(N//3, [160, 150, 150], [0, 22.73, 0], 
+                                   pf.power, (1, 5, 2), pf.const, (66,))
     part = np.vstack( (stellar1, stellar2) )
-    
+
     # density field
     dens = ms.CIC_3D(part)
     

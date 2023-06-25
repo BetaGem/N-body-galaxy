@@ -39,20 +39,24 @@ def plot_file(path, slice_num):
     '''
     Description: generate animations from files
     '''
-    plt.figure(1, figsize=(12,6))
+    plt.figure(1, figsize=(6,6))
     
     for i in range(slice_num):
         # load particles
         part = np.load(path + str(i) + ".npy")
         # animation
         plt.clf()
-        plt.subplot(121)
-        plt.xlim(0, Ng); plt.ylim(0, Ng)
-        plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.2)
-        
-        plt.subplot(122)
+        #plt.subplot(121)
+        #plt.xlim(0, Ng); plt.ylim(0, Ng)
+        #plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.2)
+        #
+        #plt.subplot(122)
         dens = CIC_3D(part)
-        plt.imshow(np.cbrt(np.sum(dens, axis=0)), vmin=0, vmax=2, cmap="gray")
+        kernel = make_2dgaussian_kernel(fwhm=5, size=15)
+        intens = convolve(np.sum(dens, axis=0) + np.random.randn(512, 512)*.01, kernel)
+        intens[intens < 0] = 0
+        plt.imshow(np.log10(intens + .02), cmap="gray", origin="lower")
+        plt.text(5, 500, str(round(i*0.01, 2))+" Gyr", c="w", ha="left", va="top", fontsize="small")
         plt.pause(0.01)
 
 if __name__ == "__main__":
