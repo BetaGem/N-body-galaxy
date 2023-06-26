@@ -11,22 +11,21 @@ def plot_all(part, dens, Phi, acc, save=False):
     Description: plot the result.
     '''
     plt.clf()
-    plt.figure(1, figsize=(8,4))
+    plt.figure(1, figsize=(16,4))
 
-    #plt.subplot(141, title="particles")
-    #plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.3)
-    #plt.xlim(0, Ng); plt.ylim(0, Ng)
-    plt.subplot(121, title="density field")
+    plt.subplot(141, title="particles")
+    plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.3)
+    plt.xlim(0, Ng); plt.ylim(0, Ng)
+    plt.subplot(142, title="density field")
     plt.imshow(np.arcsinh(np.sum(dens, axis=0)), origin="lower")
-    
-    plt.subplot(122, title="gravitational potential")
+    plt.subplot(143, title="gravitational potential")
     plt.imshow(np.sum(Phi, axis=0), origin="lower", cmap="jet")
     plt.clim(np.min(np.sum(Phi, axis=0)), np.max(np.sum(Phi, axis=0)))
-    #plt.subplot(144, title="acceleration field")
-    #plt.imshow(acc[1][z] ** 2 + acc[2][z] ** 2, origin="lower", cmap="jet")
-    #plt.clim(np.min(acc[1] ** 2 + acc[2] ** 2) ,np.max(acc[1] ** 2 + acc[2] ** 2))
-    if save: plt.save(save)
+    plt.subplot(144, title="acceleration field")
+    plt.imshow(acc[1][z] ** 2 + acc[2][z] ** 2, origin="lower", cmap="jet")
+    plt.clim(np.min(acc[1] ** 2 + acc[2] ** 2) ,np.max(acc[1] ** 2 + acc[2] ** 2))
     plt.pause(0.01)
+    if save: plt.save(save)
     
 def save_data(data, path="."):
     '''
@@ -46,17 +45,16 @@ def plot_file(path, slice_num):
         part = np.load(path + str(i) + ".npy")
         # animation
         plt.clf()
-        #plt.subplot(121)
-        #plt.xlim(0, Ng); plt.ylim(0, Ng)
-        #plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.2)
+        # plt.subplot(121)
+        # plt.xlim(0, Ng); plt.ylim(0, Ng)
+        # plt.scatter(part[:,ix], part[:,iy], c="k", s=.1, alpha=.2)
         #
-        #plt.subplot(122)
+        # plt.subplot(122)
         dens = CIC_3D(part)
         kernel = make_2dgaussian_kernel(fwhm=5, size=15)
         intens = convolve(np.sum(dens, axis=0) + np.random.randn(512, 512)*.01, kernel)
         intens[intens < 0] = 0
         plt.imshow(np.log10(intens + .02), cmap="gray", origin="lower")
-        plt.text(5, 500, str(round(i*0.01, 2))+" Gyr", c="w", ha="left", va="top", fontsize="small")
         plt.pause(0.01)
 
 if __name__ == "__main__":
