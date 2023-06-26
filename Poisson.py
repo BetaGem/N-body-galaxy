@@ -18,8 +18,6 @@ def poisson_solver_fft3(dens):
     Phi_k = - fftn(dens) / g_k * G * L**2 / np.pi
     Phi_k[0][0][0] = 0
 
-    #Phi_k1 = fftshift(Phi_k)
-
-    Phi = (ifftn(Phi_k).real)[:Ng, :Ng, :Ng]
+    Phi = ifftn(Phi_k).real
     
     return Phi
