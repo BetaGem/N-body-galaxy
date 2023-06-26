@@ -28,7 +28,8 @@ if __name__ == "__main__":
     
     # acceleration field
     a = force.accel(Phi)
-    
+
+    # time evolution
     for n, t in enumerate(np.arange(0, t_tot, dt)):
         
         # leapfrog
@@ -42,6 +43,5 @@ if __name__ == "__main__":
         part[:, iz:ix+1] += part[:, ivz:ivx+1] * dt / 2
         
         # plot
-        # img = ms.CIC_3D(part[:N], Ng)
-        #vi.plot_all(part, dens, Phi, a)
+        # vi.plot_all(part, dens, Phi, a)
         vi.save_data(part, "./data/"+str(n)+".npy")
