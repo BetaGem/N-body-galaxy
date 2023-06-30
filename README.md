@@ -13,6 +13,6 @@ Particle-mesh code for N-body simulations on galaxy structure and evolution.
 
 ```profiles.py```: custom analytical radial profiles
 
-## Run the codes
+## Run the code
 
 Run ```main.py``` first to get particle data in each timestep. Then run ```visualize.py``` to see the results.
