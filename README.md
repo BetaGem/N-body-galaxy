@@ -16,5 +16,14 @@ A simple particle-mesh code for N-body simulations on galaxy structure and evolu
 ## Run the code
 
 1. Create a new folder ```data``` in your work path.
-2. Run ```main.py``` to get particle data in each timestep.
-3. Run ```visualize.py``` to visualize the results.
+   ```
+   mkdir ./data
+   ```
+3. Run ```main.py``` to get particle data in each timestep.
+   ```
+   python main.py
+   ```
+5. Run ```visualize.py``` to visualize the results.
+   ```
+   python visualize.py
+   ```
