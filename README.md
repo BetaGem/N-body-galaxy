@@ -1,9 +1,9 @@
 # N-body-galaxy
-Particle-mesh code for N-body simulations on galaxy structure and evolution.
+A simple particle-mesh code for N-body simulations on galaxy structure and evolution.
 
-```main.py```: you should initialize your particles in this file
+```main.py```: **please initialize the particles in this file**
 
-```params.py```: set the simulation parameters here
+```params.py```: **set the basic simulation parameters here**
 
 ```force.py```: calculate acceleration and force
 
@@ -11,8 +11,10 @@ Particle-mesh code for N-body simulations on galaxy structure and evolution.
 
 ```mass_assign.py```: get density field from particle distribution
 
-```profiles.py```: custom analytical radial profiles
+```profiles.py```: custom analytical radial profiles of galaxies
 
 ## Run the code
 
-Run ```main.py``` first to get particle data in each timestep. Then run ```visualize.py``` to see the results.
+1. Create a new folder ```data``` in your work path.
+2. Run ```main.py``` to get particle data in each timestep.
+3. Run ```visualize.py``` to visualize the results.
