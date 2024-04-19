@@ -52,7 +52,7 @@ def plot_file(path, slice_num):
         # plt.subplot(122)
         dens = CIC_3D(part)
         kernel = make_2dgaussian_kernel(fwhm=5, size=15)
-        intens = convolve(np.sum(dens, axis=0) + np.random.randn(512, 512)*.01, kernel)
+        intens = convolve(np.sum(dens, axis=0) + np.random.randn(Ng, Ng)*.01, kernel)
         intens[intens < 0] = 0
         plt.imshow(np.log10(intens + .02), cmap="gray", origin="lower")
         plt.pause(0.01)
