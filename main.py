@@ -14,10 +14,10 @@ np.seterr(all="ignore")
 if __name__ == "__main__":
     
     # initializing particles
-    stellar1 = galaxy.set_spheroid(N, [320, 330, 330], [0, -7.57, 0], 
-                                   pf.power, (1, 10, 2), pf.const, (115,))
-    stellar2 = galaxy.set_spheroid(N//3, [160, 150, 150], [0, 22.73, 0], 
-                                   pf.power, (1, 5, 2), pf.const, (66,))
+    stellar1 = galaxy.set_spheroid(N, [300, 300, 256], [-5, -5, 0], 
+                                   pf.power, (1, 3.61, 2), pf.const, (99,))
+    stellar2 = galaxy.set_spheroid(N//2, [180, 180, 256], [5, 10, 0], 
+                                   pf.power, (1, 2.55, 2), pf.const, (69,))
     part = np.vstack( (stellar1, stellar2) )
 
     # density field
