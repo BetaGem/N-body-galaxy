@@ -16,7 +16,7 @@ def sph_sampler(func1, func2, args1, args2, N):
     Return:
         part: position, velocity and mass of particles
     '''
-    r_bin = np.arange(0.01, 60, .01)
+    r_bin = np.arange(0.01, 25, .01) # max radius = 25
     
     # (r, theta, phi)
     prob = func1(r_bin, args1) * r_bin**2
