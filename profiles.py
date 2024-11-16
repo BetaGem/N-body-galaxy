@@ -34,3 +34,11 @@ def double_power(r, args):
     args[3]: outer power law index
     '''
     return args[0] / (r / args[1]) ** args[2] / (1 + r / args[1]) ** (args[3] - args[2])
+
+
+def exponential(r, args):
+    '''
+    args[0]: normalization
+    args[1]: scale length
+    '''
+    return args[0] * np.exp(- r / args[1])

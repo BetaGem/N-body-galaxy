@@ -5,25 +5,30 @@ import mass_assign as ms
 import visualize as vi
 import galaxy
 import Poisson
-import force  
+import force
 import profiles as pf
 from params import *
 
 np.seterr(all="ignore")
+np.random.seed(seed)
 
 if __name__ == "__main__":
     
-    # initializing particles
+    # initializing particles (should be modified for your simulaition)
+    # ------------------------------------------------------------------------------
     stellar1 = galaxy.set_spheroid(N, [300, 300, 256], [-5, -5, 0], 
-                                   pf.power, (1, 3.61, 2), pf.const, (99,))
+                                   pf.power, (1, 3.61, 2), pf.const, (99,), max_radius=30)
     stellar2 = galaxy.set_spheroid(N//2, [180, 180, 256], [5, 10, 0], 
-                                   pf.power, (1, 2.55, 2), pf.const, (69,))
-    part = np.vstack( (stellar1, stellar2) )
+                                   pf.power, (1, 2.55, 2), pf.const, (69,), max_radius=30)
+    # ------------------------------------------------------------------------------
+
+    # stack all the particles
+    part = np.vstack( (stellar1, stellar2 ) )
 
     # density field
     dens = ms.CIC_3D(part)
     
-    # gravitational potential 
+    # gravitational potential
     Phi = Poisson.poisson_solver_fft3(dens)
     
     # acceleration field
@@ -43,5 +48,7 @@ if __name__ == "__main__":
         part[:, iz:ix+1] += part[:, ivz:ivx+1] * dt / 2
         
         # plot
-        # vi.plot_all(part, dens, Phi, a)
-        vi.save_data(part, "./data/"+str(n)+".npy")
+        if plot_on_the_fly:
+            vi.plot_all(part, dens, Phi, a, save=save_data)
+        else:
+            vi.save_data(part, "./data/"+str(n)+".npy")
